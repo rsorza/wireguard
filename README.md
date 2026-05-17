@@ -137,16 +137,21 @@ If UFW was used during installation, the script also removes the WireGuard NAT b
 
 ## License
 
-The original script was created by Nyr and released under the MIT License.
+The original script was created by Nyr and released under the MIT License. Linux + MikroTik modifications are maintained by rsorza.
 
 MIT is a permissive license. In practical terms, you may use, copy, modify, publish, distribute, sublicense, and sell modified versions of the software. The important condition is that the original copyright notice and MIT license text must be included in copies or substantial portions of the software.
 
-This project is a modified version of Nyr's installer, so keep proper attribution to the original author and include the MIT license notice in your repository.
+This project is a modified version of Nyr's installer. The repository keeps attribution for the original author and adds copyright for the Linux + MikroTik modifications.
+
+```text
+Copyright (c) 2020 Nyr
+Copyright (c) 2026 rsorza
+```
 
 ## Credits
 
 - Original project: [Nyr/wireguard-install](https://github.com/Nyr/wireguard-install)
-- Customized for Linux + MikroTik WireGuard deployment workflows.
+- Linux + MikroTik modifications: rsorza
 
 ---
 
@@ -294,15 +299,20 @@ sudo ./wireguard-install.sh
 
 ## Лицензия
 
-Оригинальный скрипт создан Nyr и выпущен под лицензией MIT.
+Оригинальный скрипт создан Nyr и выпущен под лицензией MIT. Модификации Linux + MikroTik поддерживаются rsorza.
 
 MIT - разрешительная лицензия. Практически это значит, что вы можете использовать, копировать, изменять, публиковать, распространять, сублицензировать и продавать измененные версии ПО. Главное условие: сохранить оригинальное copyright-уведомление и текст лицензии MIT в копиях или существенных частях ПО.
 
-Этот проект является модифицированной версией установщика Nyr, поэтому в репозитории нужно сохранить указание на оригинального автора и MIT license notice.
+Этот проект является модифицированной версией установщика Nyr. В репозитории сохранено указание на оригинального автора и добавлен copyright для модификаций Linux + MikroTik.
+
+```text
+Copyright (c) 2020 Nyr
+Copyright (c) 2026 rsorza
+```
 
 ## Благодарности
 
 - Оригинальный проект: [Nyr/wireguard-install](https://github.com/Nyr/wireguard-install)
-- Модификация под рабочие сценарии Linux + MikroTik WireGuard.
+- Модификации Linux + MikroTik: rsorza
 
 </details>

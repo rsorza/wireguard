@@ -1,8 +1,12 @@
 #!/bin/bash
 #
-# https://github.com/Nyr/wireguard-install
+# Original project: https://github.com/Nyr/wireguard-install
 #
-# Copyright (c) 2020 Nyr. Released under the MIT License.
+# Copyright (c) 2020 Nyr
+# Copyright (c) 2026 rsorza
+#
+# Linux + MikroTik modifications by rsorza.
+# Released under the MIT License.
 
 
 # Detect Debian users running the script with "sh" instead of bash
