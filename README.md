@@ -28,7 +28,23 @@ The script keeps the simple interactive workflow of the original installer, but 
 
 ## Usage
 
-Download or copy the script to your server, then run:
+Download the script from GitHub with `wget` or `curl`, then run it:
+
+```bash
+wget https://raw.githubusercontent.com/rsorza/wireguard/main/wireguard-install.sh
+chmod +x wireguard-install.sh
+sudo ./wireguard-install.sh
+```
+
+```bash
+curl -O https://raw.githubusercontent.com/rsorza/wireguard/main/wireguard-install.sh
+chmod +x wireguard-install.sh
+sudo ./wireguard-install.sh
+```
+
+Script page on GitHub: [wireguard-install.sh](https://github.com/rsorza/wireguard/blob/main/wireguard-install.sh)
+
+Alternatively, copy the script to your server manually, then run:
 
 ```bash
 chmod +x wireguard-install.sh
@@ -169,7 +185,23 @@ This project is a modified version of Nyr's installer, so keep proper attributio
 
 ## Использование
 
-Скопируйте скрипт на сервер и запустите:
+Скачайте скрипт с GitHub через `wget` или `curl`, затем запустите:
+
+```bash
+wget https://raw.githubusercontent.com/rsorza/wireguard/main/wireguard-install.sh
+chmod +x wireguard-install.sh
+sudo ./wireguard-install.sh
+```
+
+```bash
+curl -O https://raw.githubusercontent.com/rsorza/wireguard/main/wireguard-install.sh
+chmod +x wireguard-install.sh
+sudo ./wireguard-install.sh
+```
+
+Страница скрипта на GitHub: [wireguard-install.sh](https://github.com/rsorza/wireguard/blob/main/wireguard-install.sh)
+
+Либо скопируйте скрипт на сервер вручную и запустите:
 
 ```bash
 chmod +x wireguard-install.sh
