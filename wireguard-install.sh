@@ -238,6 +238,13 @@ new_client_setup () {
 		echo "Enter allowed-address for the Linux server peer on MikroTik."
 		read -p "MikroTik peer allowed-address [0.0.0.0/0]: " mikrotik_peer_allowed
 		[[ -z "$mikrotik_peer_allowed" ]] && mikrotik_peer_allowed="0.0.0.0/0"
+		default_mikrotik_routes="10.7.0.0/24$(grep -q 'fddd:2c4:2c4:2c4::1' /etc/wireguard/wg0.conf && echo ", fddd:2c4:2c4:2c4::/64")"
+		echo
+		echo "Enter static routes to add on MikroTik via wg-$client."
+		echo "Add Linux-side LANs here if this is site-to-site. Use commas or spaces."
+		echo "If you route 0.0.0.0/0 through the tunnel, keep a separate WAN route to the WireGuard endpoint."
+		read -p "MikroTik static routes [$default_mikrotik_routes]: " mikrotik_routes
+		[[ -z "$mikrotik_routes" ]] && mikrotik_routes="$default_mikrotik_routes"
 		cat << EOF >> /etc/wireguard/wg0.conf
 # BEGIN_PEER $client
 [Peer]
@@ -258,6 +265,14 @@ EOF
 /ipv6 address add address=fddd:2c4:2c4:2c4::$octet/64 interface=wg-$client
 EOF
 		fi
+		mikrotik_routes=$(echo "$mikrotik_routes" | tr ',' ' ')
+		for mikrotik_route in $mikrotik_routes; do
+			if grep -q ':' <<< "$mikrotik_route"; then
+				echo "/ipv6 route add dst-address=$mikrotik_route gateway=wg-$client comment=\"WireGuard $client\"" >> "$script_dir"/"$client"-mikrotik.rsc
+			else
+				echo "/ip route add dst-address=$mikrotik_route gateway=wg-$client comment=\"WireGuard $client\"" >> "$script_dir"/"$client"-mikrotik.rsc
+			fi
+		done
 		return
 	fi
 	# Configure client in the server

@@ -14,6 +14,7 @@ The script keeps the simple interactive workflow of the original installer, but 
 - Adds MikroTik RouterOS peers by asking for the MikroTik public key.
 - Generates a MikroTik `.rsc` file with RouterOS commands for the peer.
 - Supports site-to-site MikroTik use cases by allowing custom `AllowedIPs`.
+- Adds optional MikroTik static routes through the WireGuard interface.
 - Lets you choose between UFW and iptables on Debian/Ubuntu.
 - Keeps the original add/remove client workflow.
 - Removes BoringTun and all downloads from `wg.nyr.be`.
@@ -88,6 +89,7 @@ The script then:
 - Adds the MikroTik peer to `/etc/wireguard/wg0.conf`.
 - Asks for server-side `AllowedIPs`.
 - Asks for MikroTik-side `allowed-address`.
+- Asks which static routes should be added on MikroTik through the WireGuard interface.
 - Generates a RouterOS command file:
 
 ```text
@@ -107,6 +109,15 @@ For site-to-site tunnels, add the MikroTik LAN subnet, for example:
 ```
 
 On MikroTik, run the generated `.rsc` commands or paste them into the RouterOS terminal.
+
+For routed site-to-site tunnels, MikroTik usually also needs explicit static routes. The generated `.rsc` can add routes like:
+
+```routeros
+/ip route add dst-address=10.7.0.0/24 gateway=wg-client comment="WireGuard client"
+/ip route add dst-address=10.10.0.0/16 gateway=wg-client comment="WireGuard client"
+```
+
+If you route `0.0.0.0/0` through the tunnel, make sure MikroTik still has a separate WAN route to the WireGuard server endpoint, otherwise the tunnel endpoint can become unreachable.
 
 ## Adding Clients Later
 
@@ -176,6 +187,7 @@ Copyright (c) 2026 rsorza
 - Добавление MikroTik RouterOS peer через ввод Public Key со стороны MikroTik.
 - Генерация `.rsc` файла с командами RouterOS.
 - Поддержка site-to-site сценариев за счет ручного указания `AllowedIPs`.
+- Добавление статических маршрутов MikroTik через WireGuard-интерфейс.
 - Выбор UFW или iptables на Debian/Ubuntu.
 - Сохранена логика добавления и удаления клиентов из оригинального скрипта.
 - Убраны BoringTun и все обращения к `wg.nyr.be`.
@@ -250,6 +262,7 @@ client-name.conf
 - Добавит MikroTik peer в `/etc/wireguard/wg0.conf`.
 - Спросит `AllowedIPs` на стороне Linux-сервера.
 - Спросит `allowed-address` для peer на стороне MikroTik.
+- Спросит, какие статические маршруты добавить на MikroTik через WireGuard-интерфейс.
 - Создаст файл RouterOS-команд:
 
 ```text
@@ -269,6 +282,15 @@ client-name-mikrotik.rsc
 ```
 
 На MikroTik выполните команды из `.rsc` файла или вставьте их в терминал RouterOS.
+
+Для routed site-to-site туннелей MikroTik обычно также требует явные статические маршруты. Сгенерированный `.rsc` может добавить маршруты вида:
+
+```routeros
+/ip route add dst-address=10.7.0.0/24 gateway=wg-client comment="WireGuard client"
+/ip route add dst-address=10.10.0.0/16 gateway=wg-client comment="WireGuard client"
+```
+
+Если направляете `0.0.0.0/0` через туннель, убедитесь, что у MikroTik остается отдельный WAN-маршрут до endpoint WireGuard-сервера, иначе endpoint может стать недоступен.
 
 ## Добавление клиентов после установки
 
